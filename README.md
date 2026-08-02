@@ -27,10 +27,21 @@ All data sources are publicly available from Irish sources.
 | 5 | Average Agricultural Land Price by County | https://teagasc.ie/news--events/daily/map-land-prices-by-county/ | Manual (TXT) | Teagasc county-level average land price per acre (€), manually transcribed from published map visual |
 
 ---
+## [Dataset Creation](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/1_Data_Prep.ipynb)
+
+Some pre-processing was done in excel to remove redundant and missing variables 
+
+The following pipeline was followed in python:
+1. Load each CSV source
+2. Standardise county names and filter to year 2022 in Python (no external Excel pre-processing)
+3. Engineer two derived features
+4. Merge all sources on County
+5. Drop redundant columns
+6. Save the final dataset
 ## Task Definitions
 
 ### Clustering Task
-**Objective:** Two unsupervised clustering algorithms are applied, K-Means (k=3) and Agglomerative Hierarchical Clustering (k=3, Ward linkage). These are applied to the data with no knowledge of the manually assigned tier labels. The goal is simply to see whether the data finds its own natural groupings, and whether those groupings end up looking anything like the property market segments we'd expect.
+**Objective:** Two unsupervised clustering algorithms are applied, [K-Means (k=3)](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/2_KMeans_Clustering.ipynb) and [Agglomerative Hierarchical Clustering (k=3, Ward linkage)](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/3_agglomerative_clustering_model2.ipynb). These are applied to the data with no knowledge of the manually assigned tier labels. The goal is simply to see whether the data finds its own natural groupings, and whether those groupings end up looking anything like the property market segments we'd expect.
 
 **Features used for clustering:** Rent_Price, Land_Price, Population of County, Average_Value_County, Net_Income, Average_Value_Bedroom_Count
 
@@ -38,8 +49,8 @@ All data sources are publicly available from Irish sources.
 
 ### Multiclass Classification Task
 **Objective:** Two supervised classifiers, Logistic Regression and Random Forest, are trained and compared on the task of predicting the Price_Category label (Budget / Standard / Luxury) from a property's county-level and property-level features.
-- **Logistic Regression** acts as the baseline. Its coefficients are easy to read and make it simple to explain why a property was assigned to a particular tier.
-- **Random Forest** is the main model being evaluated. It works across an ensemble of decision trees, which means it can pick up on patterns and feature interactions that a straight linear model would miss. It also produces feature importance scores which are important for answering *which factors best determine a property's tier?*
+- [**Logistic Regression**](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/4_logistic_regression.ipynb) acts as the baseline. Its coefficients are easy to read and make it simple to explain why a property was assigned to a particular tier.
+- [**Random Forest**](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/5_randomforest_and_regression_models_comparison.ipynb) is the main model being evaluated. It works across an ensemble of decision trees, which means it can pick up on patterns and feature interactions that a straight linear model would miss. It also produces feature importance scores which are important for answering *which factors best determine a property's tier?*
 - 
 **Target variable:** Price_Category, a three-class label (Budget / Standard / Luxury) derived from Rent_Price percentile thresholds as set out in Section 5.
 
@@ -48,31 +59,7 @@ All data sources are publicly available from Irish sources.
 **Business value:** With a working classifier in place, the development team can put in the relevant details for a proposed site and get back a tier prediction straight away rather than waiting on a manual valuation. The Random Forest importance scores are also useful for working out which pieces of information are most influential when scoping out future sites.
 
 # Findings: 
-
-## Logistic Regression
-* **Luxury**: This is the best performing class with the highest f1-score and recall score of 0.82 and 0.89 respectively. The model correctly identified 107 of 120 luxury properties with all misclassifications (13) landing in standard. Correctly identifying lxury properties is critical as it prevents under-pricing of premium properties in high-values counties.
-
-* **Budget**: Budget also performs strongly with a recall score of 0.88 and an f1-score of 0.78. It correctly identifies 107 of 121 budget properties with all 14 misclassifications landing in standard, similar to luxury.
-
-* **Standard**: Standard is the weakest performer across the three with the weakest recall of 0.67 and f1-score of 0.75. It correctly identifies 162 of 241 Standard properties. 46 misclassifications went to budget and 33 to luxury. The high precision of 0.86 shows that when the model does predict Standard, it's usually correct.
-
-* There are zero budget-luxury misclassifications or luxury-budget, all errors occur at the standard boundary where cost to a developer would be much lower than a luxury budget misclassification
-## Model Accuracy Score
-* The model achieves a test accuracy of 78%
-* This is a strong result considering that `Rent_Price`, which would be the most direct indicator of a property's tier, was deliberately excluded to prevent data leakage. 
-* The model is predicting tier level entirely from county-level economic features, land price, property values, and bedroom type, which are all available before any rental valuation is done.
-
-## Agglomerative Clustering Model
-**Optimal Separation:**
-* For all models, the clusters are divided along the horizontal axis, indicating that PC1 is the primary driver of cluster separation. PC1 once again likely reflects high value factors like Rent_Price and Population.
-* In all three models the 'Dublin cluster' is clearly separated along the horizontal axis. However, when using 3 clusters the separation isn't as distinct. While the clusters are moderately separated in our models with 3 clusters, using 2 clusters creates an increased separation between clusters.
-* The main difference in our k-means model with 3 clusters and our agglomerative model with 3 clusters, is within our k-means model there is a small amount of crossover between our 'luxury' and 'standard' clusters indicating less separation. Out of all models the Agglomerative Model with 2 clusters returns the highest silhouette score (0.6) indicating it returns the most well-defined and separated cluster. For this reason we believe this is the optimal model for our business to use, even if it does not line up with our 3-tiered pricing system. 
-
-* **Business Impact:**
-Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
-
-
-## Logistic Regression and Random Forest Model Comparison and Business use
+## [Logistic Regression and Random Forest Model Comparison and Business use](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/5_randomforest_and_regression_models_comparison.ipynb)
 
 * Both models achieve very similar accuracy scores, Logistic Regression at 78.01% and Random Forrest at 78.63%. 
 
