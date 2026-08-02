@@ -1,5 +1,4 @@
 # Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market
-# Project Overview: 
 ## Business Problem: 
 **Context:** The firm develops residential properties and prices them across a tiered scale Budget, Standard and Luxury to target distinct buyer and renter segments. Before committing capital to a site acquisition or development, the firm needs to determine which tier a proposed property will fall into and what market-supported rent or price it can achieve.
 
