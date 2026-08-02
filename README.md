@@ -51,7 +51,6 @@ The following pipeline was followed in python:
 **Objective:** Two supervised classifiers, Logistic Regression and Random Forest, are trained and compared on the task of predicting the Price_Category label (Budget / Standard / Luxury) from a property's county-level and property-level features.
 - [**Logistic Regression**](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/4_logistic_regression.ipynb) acts as the baseline. Its coefficients are easy to read and make it simple to explain why a property was assigned to a particular tier.
 - [**Random Forest**](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/5_randomforest_and_regression_models_comparison.ipynb) is the main model being evaluated. It works across an ensemble of decision trees, which means it can pick up on patterns and feature interactions that a straight linear model would miss. It also produces feature importance scores which are important for answering *which factors best determine a property's tier?*
-- 
 **Target variable:** Price_Category, a three-class label (Budget / Standard / Luxury) derived from Rent_Price percentile thresholds as set out in Section 5.
 
 **Features used:** All numeric columns after redundant identifiers are removed. Both models are run on the same 80/20 split and use class_weight='balanced' to stop any imbalance between class sizes from skewing results.
