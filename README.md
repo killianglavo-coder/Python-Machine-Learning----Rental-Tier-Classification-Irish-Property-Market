@@ -47,6 +47,25 @@ All data sources are publicly available from Irish sources.
 
 **Business value:** With a working classifier in place, the development team can put in the relevant details for a proposed site and get back a tier prediction straight away rather than waiting on a manual valuation. The Random Forest importance scores are also useful for working out which pieces of information are most influential when scoping out future sites.
 
+# Findings: 
+
+## Logistic Regression
+**Luxury**: This is the best performing class with the highest f1-score and recall score of 0.82 and 0.89 respectively. The model correctly identified 107 of 120 luxury properties with all misclassifications (13) landing in standard. Correctly identifying lxury properties is critical as it prevents under-pricing of premium properties in high-values counties.
+
+**Budget**: Budget also performs strongly with a recall score of 0.88 and an f1-score of 0.78. It correctly identifies 107 of 121 budget properties with all 14 misclassifications landing in standard, similar to luxury.
+
+**Standard**: Standard is the weakest performer across the three with the weakest recall of 0.67 and f1-score of 0.75. It correctly identifies 162 of 241 Standard properties. 46 misclassifications went to budget and 33 to luxury. The high precision of 0.86 shows that when the model does predict Standard, it's usually correct.
+
+There are zero budget-luxury misclassifications or luxury-budget, all errors occur at the standard boundary where cost to a developer would be much lower than a luxury budget misclassification
+
+## Agglomerative Clustering Model
+**Optimal Separation:**
+For all models, the clusters are divided along the horizontal axis, indicating that PC1 is the primary driver of cluster separation. PC1 once again likely reflects high value factors like Rent_Price and Population. In all three models the 'Dublin cluster' is clearly separated along the horizontal axis. However, when using 3 clusters the separation isn't as distinct. While the clusters are moderately separated in our models with 3 clusters, using 2 clusters creates an increased separation between clusters. The main difference in our k-means model with 3 clusters and our agglomerative model with 3 clusters, is within our k-means model there is a small amount of crossover between our 'luxury' and 'standard' clusters indicating less separation. This is reflected in the silhouette score of 0.56 compared to 0.56. Out of all models the Agglomerative Model with 2 clusters returns the highest silhouette score (0.6) indicating it returns the most well-defined and separated cluster. For this reason we believe this is the optimal model for our business to use, even if it does not line up with our 3-tiered pricing system. 
+
+**Business Impact:**
+ Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
+
+
 ## Logistic Regression and Random Forest Model Comparison and Business use
 
 * Both models achieve very similar accuracy scores, Logistic Regression at 78.01% and Random Forrest at 78.63%. 
