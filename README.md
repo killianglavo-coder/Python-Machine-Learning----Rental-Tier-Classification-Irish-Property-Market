@@ -57,13 +57,19 @@ All data sources are publicly available from Irish sources.
 * **Standard**: Standard is the weakest performer across the three with the weakest recall of 0.67 and f1-score of 0.75. It correctly identifies 162 of 241 Standard properties. 46 misclassifications went to budget and 33 to luxury. The high precision of 0.86 shows that when the model does predict Standard, it's usually correct.
 
 * There are zero budget-luxury misclassifications or luxury-budget, all errors occur at the standard boundary where cost to a developer would be much lower than a luxury budget misclassification
+## Model Accuracy Score
+* The model achieves a test accuracy of 78%
+* This is a strong result considering that `Rent_Price`, which would be the most direct indicator of a property's tier, was deliberately excluded to prevent data leakage. 
+* The model is predicting tier level entirely from county-level economic features, land price, property values, and bedroom type, which are all available before any rental valuation is done.
 
 ## Agglomerative Clustering Model
 **Optimal Separation:**
-* For all models, the clusters are divided along the horizontal axis, indicating that PC1 is the primary driver of cluster separation. PC1 once again likely reflects high value factors like Rent_Price and Population. In all three models the 'Dublin cluster' is clearly separated along the horizontal axis. However, when using 3 clusters the separation isn't as distinct. While the clusters are moderately separated in our models with 3 clusters, using 2 clusters creates an increased separation between clusters. The main difference in our k-means model with 3 clusters and our agglomerative model with 3 clusters, is within our k-means model there is a small amount of crossover between our 'luxury' and 'standard' clusters indicating less separation. This is reflected in the silhouette score of 0.56 compared to 0.56. Out of all models the Agglomerative Model with 2 clusters returns the highest silhouette score (0.6) indicating it returns the most well-defined and separated cluster. For this reason we believe this is the optimal model for our business to use, even if it does not line up with our 3-tiered pricing system. 
+* For all models, the clusters are divided along the horizontal axis, indicating that PC1 is the primary driver of cluster separation. PC1 once again likely reflects high value factors like Rent_Price and Population.
+* In all three models the 'Dublin cluster' is clearly separated along the horizontal axis. However, when using 3 clusters the separation isn't as distinct. While the clusters are moderately separated in our models with 3 clusters, using 2 clusters creates an increased separation between clusters.
+* The main difference in our k-means model with 3 clusters and our agglomerative model with 3 clusters, is within our k-means model there is a small amount of crossover between our 'luxury' and 'standard' clusters indicating less separation. Out of all models the Agglomerative Model with 2 clusters returns the highest silhouette score (0.6) indicating it returns the most well-defined and separated cluster. For this reason we believe this is the optimal model for our business to use, even if it does not line up with our 3-tiered pricing system. 
 
-**Business Impact:**
- * Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
+* **Business Impact:**
+Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
 
 
 ## Logistic Regression and Random Forest Model Comparison and Business use
