@@ -69,7 +69,7 @@ The following pipeline was followed in python:
 - For this reason we believe this is the optimal model for our business to use, even if it does not line up with our 3-tiered pricing system. 
 
 **Business Impact:**
-- Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
+Overall, a two-cluster agglomerative model is likely the most suitable for this data revealing the need for our business to treat the Dublin rental market entirely different to the rest of the country. Overall, this spurs further investigation into the drivers of rental prices within these two clusters, and on collection of more data this model should be re-deployed to employ this strategy. Although any use in a business scenario the model should be used a tool alongside employees with expert domain knowledge to ensure active over-sight of the model's decision-making.
 
 ## [K-Means (k=3)](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/2_KMeans_Clustering.ipynb)
 Price Category Breakdown:
@@ -85,7 +85,7 @@ Price Category Breakdown:
 The strong performance on Luxury (F1: 0.79) and reasonable performance on Budget (F1: 0.63) is particularly valuable for a property developer. Correctly identifying premium developments avoids under-pricing, which directly protects revenue. The weaker Standard performance highlights that mid-range pricing decisions may benefit from additional features such as proximity to Eircode zones or local amenity data to sharpen tier boundaries in future iterations of the model.
 
 ## [Logistic Regression and Random Forest Model Comparison and Business use](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/5_randomforest_and_regression_models_comparison.ipynb)
--Both models achieve very similar accuracy scores, Logistic Regression at 78.01% and Random Forrest at 78.63%. 
+Both models achieve very similar accuracy scores, Logistic Regression at 78.01% and Random Forrest at 78.63%. 
 
 - Regarding the confusion matrices, the key difference is in how each model handles the budget tier. Logistic Regression correctly identifies 107 of 121 Budget properties, random forest only gets 88, misclassifying 33 as standard. 
 
