@@ -56,7 +56,7 @@ The following pipeline was followed in python:
 
 **Business value:** With a working classifier in place, the development team can put in the relevant details for a proposed site and get back a tier prediction straight away rather than waiting on a manual valuation. The Random Forest importance scores are also useful for working out which pieces of information are most influential when scoping out future sites.
 
-# Findings: 
+# Findings and Business Use Case: 
 
 ## [Agglomerative Hierarchical Clustering (k=3, Ward linkage)](https://github.com/killianglavo-coder/Python-Machine-Learning----Rental-Tier-Classification-Irish-Property-Market/blob/main/3_agglomerative_clustering_model2.ipynb)
 **Optimal Separation:**
